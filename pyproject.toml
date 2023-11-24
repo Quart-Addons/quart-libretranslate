@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "quart-extension"
+name = "quart_libretranslate"
 version = "0.0.1"
-description = "A VS Code dev container for developing quart extensions."
+description = "LibreTranslate for Quart"
 authors = ["Chris Rood <quart.addons@gmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -14,7 +14,7 @@ target-version = ["py38"]
 combine_as_imports = true
 force_grid_wrap = 0
 include_trailing_comma = true
-known_first_party = "quart_ext, tests"
+known_first_party = "quart_libretranslate, tests"
 line_length = 100
 multi_line_output = 3
 no_lines_before = "LOCALFOLDER"
@@ -41,6 +41,7 @@ warn_unused_ignores = true
 [tool.poetry.dependencies]
 python = "^3.10"
 quart = "^0.19.4"
+httpx = "^0.25.1"
 
 
 [tool.poetry.group.dev.dependencies]
