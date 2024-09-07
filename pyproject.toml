@@ -40,8 +40,8 @@ warn_unused_ignores = true
 
 [tool.poetry.dependencies]
 python = "^3.10"
-quart = "^0.19.4"
-httpx = "^0.25.1"
+quart = "*"
+httpx = "*"
 
 
 [tool.poetry.group.dev.dependencies]
