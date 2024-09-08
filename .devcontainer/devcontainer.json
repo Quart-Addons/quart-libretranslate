@@ -1,11 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.241.1/containers/python-3
 {
-	"name": "Quart LibreTranslate",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": ".."
-	},
+	"name": "Quart-LibreTranslate",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -24,7 +23,8 @@
 				"ms-python.mypy-type-checker",
 				"ms-python.black-formatter",
 				"ms-python.autopep8",
-				"ms-python.isort"
+				"ms-python.isort",
+				"george-alisson.html-preview-vscode"
 			]
 		}
 	},
