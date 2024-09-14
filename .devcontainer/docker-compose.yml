@@ -20,7 +20,7 @@ services:
       - LT_UPDATE_MODELS=true
       - LT_SUGGESTIONS=false
       - LT_METRICS=true
-      - LT_API_KEYS=true
+      - LT_API_KEYS=false
       - LT_API_KEYS_DB_PATH=/app/db/api_keys.db
     volumes:
       - libretranslate_api_keys:/app/db
