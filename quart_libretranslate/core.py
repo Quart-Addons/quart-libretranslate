@@ -58,10 +58,6 @@ class LibreTranslate:
                 isinstance(app.config.get('LIBRETRANSLATE_API_KEY'), str)):
             raise TypeError('The API Key needs to be a string.')
 
-        if (app.config.get('LIBRETRANSLATE_TIMEOUT') and not
-                isinstance(app.config.get('LIBRETRANSLATE_TIMEOUT'), float)):
-            raise TypeError('The timeout value needs to be a float.')
-
         app.extensions['translate'] = self
 
     @property
