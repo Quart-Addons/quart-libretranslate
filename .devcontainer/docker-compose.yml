@@ -5,19 +5,22 @@ services:
       dockerfile: Dockerfile
     command: sleep infinity
     network_mode: service:libretranslate
+    links:
+      - libretranslate
 
   libretranslate:
     container_name: LibreTranslate
     image: libretranslate/libretranslate:latest
     restart: unless-stopped
     ports:
-      - "5001:5000"
+      - "8000:8000"
     healthcheck:
       test: ['CMD-SHELL', './venv/bin/python scripts/healthcheck.py']
     security_opt:
       - no-new-privileges:true
     environment:
       - LT_DEBUG=true
+      - LT_PORT=8000
       - LT_LOAD_ONLY=en,es
       - LT_UPDATE_MODELS=true
       - LT_FRONTEND_LANGUAGE_SOURCE="en"
