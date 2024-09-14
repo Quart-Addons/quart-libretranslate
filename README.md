@@ -1,5 +1,7 @@
 # Quart LibreTranslate
 
+![Quart Uploads Logo](logos/logo.png)
+
 This is a basic extension to use [LibreTranslate][] in your Quart app
 and is based on [AIOHttp][]. LibreTranslate can be ran on the same server
 as your Quart app allowing you not needing a third-party provider. 
