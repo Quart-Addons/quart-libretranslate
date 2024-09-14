@@ -14,7 +14,7 @@ services:
     healthcheck:
       test: ['CMD-SHELL', './venv/bin/python scripts/healthcheck.py']
     security_opt:
-      - no-new-privileges: true
+      - no-new-privileges:true
     environment:
       - LT_LOAD_ONLY=en,es
       - LT_UPDATE_MODELS=true
