@@ -5,8 +5,6 @@ services:
       dockerfile: Dockerfile
     command: sleep infinity
     network_mode: service:libretranslate
-    links:
-      - libretranslate
 
   libretranslate:
     container_name: LibreTranslate
