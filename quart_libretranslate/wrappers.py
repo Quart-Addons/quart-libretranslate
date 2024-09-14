@@ -35,10 +35,12 @@ async def languages() -> List[Dict[str, str]]:
         `ApiError`
     """
     t: LibreTranslate = current_app.extensions['translate']
-    return await t.languages()
+    return await t.languages
 
 
-async def translate(q: str, source: str = 'en', target: str = 'es') -> str:
+async def translate(
+        q: str, source: str = 'en', target: str = 'es'
+) -> Dict[str, Any]:
     """
     Translate a string.
 

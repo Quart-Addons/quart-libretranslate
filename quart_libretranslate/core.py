@@ -31,11 +31,9 @@ class LibreTranslate:
             app: Optional[Quart] = None,
             url: Optional[str] = None,
             api_key: Optional[str] = None,
-            timeout: Optional[float] = None
     ) -> None:
         self.url = url
         self.api_key = api_key
-        self.timeout = timeout
 
         if app is not None:
             self.init_app(app)
@@ -49,7 +47,6 @@ class LibreTranslate:
         """
         app.config.setdefault('LIBRETRANSLATE_URL', self.url)
         app.config.setdefault('LIBRETRANSLATE_API_KEY', self.api_key)
-        app.config.setdefault('LIBRETRANSLATE_TIMEOUT', self.timeout)
 
         if app.config.get('LIBRETRANSLATE_URL') is None:
             raise ValueError('The URL to LibreTranslate needs to be provided.')
@@ -82,7 +79,7 @@ class LibreTranslate:
 
     @property
     def _language_url(self) -> str:
-        return self._url + 'language'
+        return self._url + 'languages'
 
     @property
     def _translate_url(self) -> str:
@@ -95,10 +92,6 @@ class LibreTranslate:
     @property
     def _api_key(self) -> Optional[str]:
         return current_app.config.get('LIBRETRANSLATE_API_KEY')
-
-    @property
-    def _timeout(self) -> Optional[float]:
-        return current_app.config.get('LIBRETRANSLATE_TIMEOUT')
 
     @staticmethod
     def _get_url(
@@ -136,10 +129,11 @@ class LibreTranslate:
                 status = resp.status
                 data = json.loads(await resp.text())
                 if status == 200:
-                    return json.loads(data)
+                    return data
                 else:
                     raise ApiError(data['error'], status)
 
+    @property
     async def languages(self) -> List[Dict[str, str]]:
         """
         Retrieve a list of supported languages.
@@ -172,7 +166,7 @@ class LibreTranslate:
             q: str,
             source: str = 'en',
             target: str = 'es',
-    ) -> str:
+    ) -> Dict[str, Any]:
         """
         Translate a string.
 
