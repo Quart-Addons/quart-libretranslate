@@ -4,7 +4,7 @@ quart_libretranslate.core
 import json
 from typing import Any, Dict, List, Optional
 from quart import Quart, current_app
-import httpx
+import aiohttp
 
 from .error import ApiError
 
@@ -115,15 +115,14 @@ class LibreTranslate:
         if self._api_key is not None:
             params['api_key'] = self._api_key
 
-        async with httpx.AsyncClient() as client:
-            req = await client.post(self._detect_url, data=params, timeout=self._timeout)
-            response = req.read().decode()
-            r_data = json.loads(response)
-
-        if req.status_code == 200:
-            return r_data
-        else:
-            raise ApiError(r_data['error'], req.status_code)
+        async with aiohttp.ClientSession() as session:
+            async with session.post(self._detect_url, data=params) as resp:
+                status = resp.status
+                data = await resp.text()
+                if status == 200:
+                    return json.loads(data)
+                else:
+                    raise ApiError(data['error'], status)
 
     async def languages(self) -> List[Dict[str, str]]:
         """

@@ -41,7 +41,7 @@ warn_unused_ignores = true
 [tool.poetry.dependencies]
 python = "^3.12"
 quart = "*"
-httpx = "*"
+aiohttp = "^3.10.5"
 
 
 [tool.poetry.group.dev.dependencies]
