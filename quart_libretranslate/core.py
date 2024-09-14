@@ -3,8 +3,11 @@ quart_libretranslate.core
 """
 import json
 from typing import Any, Dict, List, Optional
-from quart import Quart, current_app
+from urllib import parse
+
 import aiohttp
+from quart import Quart, current_app
+from yarl import URL
 
 from .error import ApiError
 
@@ -97,6 +100,18 @@ class LibreTranslate:
     def _timeout(self) -> Optional[float]:
         return current_app.config.get('LIBRETRANSLATE_TIMEOUT')
 
+    @staticmethod
+    def _get_url(
+        url: str, params: Optional[ParamsType] = None
+    ) -> URL:
+        """
+        Returns the url to use to send the request.
+        """
+        if params:
+            url = url + '?' + parse.urlencode(params)
+            return URL(url, encoded=True)
+        return URL(url, encoded=True)
+
     async def detect(self, q: str) -> List[Dict[str, Any]]:
         """
         Detects the language of a single string.
@@ -116,9 +131,10 @@ class LibreTranslate:
             params['api_key'] = self._api_key
 
         async with aiohttp.ClientSession() as session:
-            async with session.post(self._detect_url, data=params) as resp:
+            url = self._get_url(self._detect_url, params)
+            async with session.post(url) as resp:
                 status = resp.status
-                data = await resp.text()
+                data = json.loads(await resp.text())
                 if status == 200:
                     return json.loads(data)
                 else:
@@ -138,16 +154,18 @@ class LibreTranslate:
 
         if self._api_key is not None:
             params['api_key'] = self._api_key
-
-        async with httpx.AsyncClient() as client:
-            req = await client.get(self._language_url, params=params, timeout=self._timeout)
-            response = req.read().decode()
-            r_data = json.loads(response)
-
-        if req.status_code == 200:
-            return r_data
         else:
-            raise ApiError(r_data["error"], req.status_code)
+            params = None
+
+        async with aiohttp.ClientSession() as session:
+            url = self._get_url(self._language_url, params)
+            async with session.get(url) as resp:
+                status = resp.status
+                data = json.loads(await resp.text())
+                if status == 200:
+                    return data
+                else:
+                    raise ApiError(data['error'], status)
 
     async def translate(
             self,
@@ -175,15 +193,12 @@ class LibreTranslate:
             "target": target
         }
 
-        if self._api_key is not None:
-            params["api_key"] = self._api_key
-
-        async with httpx.AsyncClient() as client:
-            req = await client.post(self._translate_url, data=params, timeout=self._timeout)
-            response = req.read().decode()
-            r_data = json.loads(response)
-
-        if req.status_code == 200:
-            return r_data['translatedText']
-        else:
-            raise ApiError(r_data['error'], req.status_code)
+        async with aiohttp.ClientSession() as session:
+            url = self._get_url(self._translate_url, params)
+            async with session.post(url) as resp:
+                status = resp.status
+                data = json.loads(await resp.text())
+                if status == 200:
+                    return data
+                else:
+                    raise ApiError(data['error'], status)
