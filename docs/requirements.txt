@@ -1,2 +1,2 @@
-pydata-sphinx-theme # Change if you want to use a different theme. 
+pydata-sphinx-theme
 sphinxcontrib-napoleon 
