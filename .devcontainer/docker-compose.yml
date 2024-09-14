@@ -17,13 +17,11 @@ services:
     security_opt:
       - no-new-privileges:true
     environment:
+      - LT_DEBUG=true
       - LT_LOAD_ONLY=en,es
       - LT_UPDATE_MODELS=true
-      - LT_SUGGESTIONS=false
-      - LT_METRICS=true
-      - LT_API_KEYS=false
-      - LT_GET_API_KEY_LINK=true
-      - LT_API_KEYS_DB_PATH=/app/db/api_keys.db
+      - LT_FRONTEND_LANGUAGE_SOURCE="en"
+      - LT_FRONTEND_LANGUAGE_TARGET="es"
     volumes:
       - libretranslate_api_keys:/app/db
       - libretranslate_local:/home/libretranslate/.local
