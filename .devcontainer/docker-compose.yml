@@ -9,6 +9,7 @@ services:
   libretranslate:
     container_name: LibreTranslate
     image: libretranslate/libretranslate:latest
+    restart: unless-stopped
     ports:
       - "5001:5000"
     healthcheck:
