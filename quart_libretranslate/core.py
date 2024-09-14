@@ -24,7 +24,6 @@ class LibreTranslate:
         app: The `Quart` application.
         url: The url to LibreTranslate with the port.
         api_key: The api key for LibreTranslate.
-        timeout: The timeout for the response in seconds.
     """
     def __init__(
             self,
@@ -94,7 +93,7 @@ class LibreTranslate:
         url: str, params: Optional[ParamsType] = None
     ) -> URL:
         """
-        Returns the url to use to send the request.
+        Builds and returns the request url.
         """
         if params:
             url = url + '?' + parse.urlencode(params)
@@ -104,6 +103,8 @@ class LibreTranslate:
     async def detect(self, q: str) -> List[Dict[str, Any]]:
         """
         Detects the language of a single string.
+
+        Must be called within app context. 
 
         Argument:
             q: The string to detect the language on.
@@ -133,6 +134,8 @@ class LibreTranslate:
     async def languages(self) -> List[Dict[str, str]]:
         """
         Retrieve a list of supported languages.
+
+        Must be called within app context.
 
         Returns:
             A list of available languages ex: [{"code":"en", "name":"English"}]
@@ -166,13 +169,16 @@ class LibreTranslate:
         """
         Translate a string.
 
+        Must be called within app context.
+
         Arguments:
             q: The text to translate.
             source: The source language code (ISO 639).
             target: The target language code (ISO 639).
 
         Returns:
-            str: The translated text
+            A dict with alternatives and translated text. The
+                translated text will be at the key "translatedText".
 
         Raises:
             `ApiError`

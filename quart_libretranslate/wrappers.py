@@ -11,6 +11,8 @@ async def detect(q: str) -> List[Dict[str, Any]]:
     """
     Detects the language of a single string.
 
+    Must be called within app context.
+
     Argument:
         q: The string to detect the language on.
 
@@ -28,6 +30,8 @@ async def languages() -> List[Dict[str, str]]:
     """
     Retrieve a list of supported languages.
 
+    Must be called within app context.
+
     Returns:
         A list of available languages ex: [{"code":"en", "name":"English"}]
 
@@ -43,6 +47,8 @@ async def translate(
 ) -> Dict[str, Any]:
     """
     Translate a string.
+
+    Must be called within app context.
 
     Arguments:
         q: The text to translate.
