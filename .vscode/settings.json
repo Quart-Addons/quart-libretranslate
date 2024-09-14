@@ -5,7 +5,9 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "cSpell.words": [
+        "aiohttp",
         "httpx",
-        "libretranslate"
+        "libretranslate",
+        "yarl"
     ]
 }
