@@ -16,17 +16,15 @@ def test_translate_url(api_url: str, app: Quart) -> None:
 
 
 @pytest.mark.asyncio
-async def test_translate_urls(
-    api_url: str,
-    app: Quart,
-    translate: LibreTranslate
-) -> None:
+async def test_translate_urls(api_url: str, app: Quart) -> None:
     """
     Test the different urls to connect to
     LibreTranslate.
     """
     # pylint: disable=W0212
     # pylint: disable=W0104
+    translate: LibreTranslate = app.extensions['translate']
+
     detect_url = api_url + 'detect'
     language_url = api_url + 'language'
     translate_url = api_url + 'translate'
