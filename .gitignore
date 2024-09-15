@@ -1,6 +1,6 @@
-__pycache__
+__pycache__/
 poetry.lock
-.pytest_cache
-.mypy_cache
-
-logos/svg/.DS_Store
+.DS_Store
+docs/_build/
+dist/
+.pytest_cache/
