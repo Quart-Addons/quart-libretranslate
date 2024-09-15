@@ -7,11 +7,11 @@
    :alt: Quart LibreTranslate Logo
    :align: right
 
-Quart Babel
--------------
+Quart LibreTranslate
+--------------------
 
-This is a basic extension to use [LibreTranslate][] in your Quart app
-and is based on [AIOHttp][]. LibreTranslate can be ran on the same server
+This is a basic extension to use `LibreTranslate`_ in your Quart app
+and is based on `AIOHttp`_. LibreTranslate can be ran on the same server
 as your Quart app allowing you not needing a third-party provider. 
 
 
