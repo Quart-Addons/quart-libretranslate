@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/Quart-Addons/quart-libretranslate"
 repository = "https://github.com/Quart-Addons/quart-libretranslate"
-documentation = "https://quart-babel.readthedocs.io/en/latest/"
+documentation = "https://quart-libretranslate.readthedocs.io/en/latest/"
 packages = [
     { include = "quart_libretranslate"},
 ]
