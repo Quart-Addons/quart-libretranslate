@@ -30,4 +30,4 @@ The for Quart-Babel and is available [here][docs].
 
 [LibreTranslate]: https://github.com/LibreTranslate/LibreTranslate
 [AIOHttp]: https://docs.aiohttp.org/en/stable/
-[docs]: https://quart-babel.readthedocs.io
+[docs]: https://quart-libretranslate.readthedocs.io/en/latest/
