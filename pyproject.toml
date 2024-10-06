@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quart_libretranslate"
-version = "0.0.1"
+version = "0.0.2"
 description = "LibreTranslate for Quart"
 authors = ["Chris Rood <quart.addons@gmail.com>"]
 license = "MIT"
@@ -10,6 +10,7 @@ repository = "https://github.com/Quart-Addons/quart-libretranslate"
 documentation = "https://quart-libretranslate.readthedocs.io/en/latest/"
 packages = [
     { include = "quart_libretranslate"},
+    { include = "quart_libretranslate/py.typed"}
 ]
 
 [tool.black]
