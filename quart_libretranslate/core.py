@@ -31,21 +31,24 @@ class LibreTranslate:
             url: Optional[str] = None,
             api_key: Optional[str] = None,
     ) -> None:
-        self.url = url
-        self.api_key = api_key
 
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, url, api_key)
 
-    def init_app(self, app: Quart) -> None:
+    def init_app(
+            self,
+            app: Quart,
+            url: Optional[str] = None,
+            api_key: Optional[str] = None
+    ) -> None:
         """
         Register the extension with the `Quart` application.
 
         Arguments:
             app: The `Quart` application.
         """
-        app.config.setdefault('LIBRETRANSLATE_URL', self.url)
-        app.config.setdefault('LIBRETRANSLATE_API_KEY', self.api_key)
+        app.config.setdefault('LIBRETRANSLATE_URL', url)
+        app.config.setdefault('LIBRETRANSLATE_API_KEY', api_key)
 
         if app.config.get('LIBRETRANSLATE_URL') is None:
             raise ValueError('The URL to LibreTranslate needs to be provided.')
@@ -104,7 +107,7 @@ class LibreTranslate:
         """
         Detects the language of a single string.
 
-        Must be called within app context. 
+        Must be called within app context.
 
         Argument:
             q: The string to detect the language on.
