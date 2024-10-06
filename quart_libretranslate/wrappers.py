@@ -7,6 +7,11 @@ from quart import current_app
 from .core import LibreTranslate
 
 
+def _get_translate() -> LibreTranslate:
+    t: LibreTranslate = current_app.extensions["translate"]
+    return t
+
+
 async def detect(q: str) -> List[Dict[str, Any]]:
     """
     Detects the language of a single string.
@@ -22,7 +27,7 @@ async def detect(q: str) -> List[Dict[str, Any]]:
     Raises:
         `ApiError`
     """
-    t: LibreTranslate = current_app.extensions['translate']
+    t = _get_translate()
     return await t.detect(q)
 
 
@@ -38,7 +43,7 @@ async def languages() -> List[Dict[str, str]]:
     Raises:
         `ApiError`
     """
-    t: LibreTranslate = current_app.extensions['translate']
+    t = _get_translate()
     return await t.languages
 
 
@@ -61,5 +66,5 @@ async def translate(
     Raises:
         `ApiError`
     """
-    t: LibreTranslate = current_app.extensions['translate']
+    t = _get_translate()
     return await t.translate(q, source, target)
