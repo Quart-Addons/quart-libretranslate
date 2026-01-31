@@ -1,5 +1,8 @@
 # Quart LibreTranslate
 
+> [!WARNING]
+> This package is no longer being maintained or developed.
+
 ![Quart Uploads Logo](logos/logo.png)
 
 This is a basic extension to use [LibreTranslate][] in your Quart app
